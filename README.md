@@ -23,5 +23,6 @@ Os algoritmos serão implementados em linguagem C e pretendo seguir esta ementa 
 ### Referências utilizadas
 <p>
 * Algorithms 4th edition - Sedgewick: https://www.cs.bu.edu/~snyder/cs112/CourseMaterials/AlgorithmsChapterOne.pdf <p>
+* R. Thareja,Data structures using c, Oxford higher education, Oxford University Press, 2014 <p>
 * IME USP - Estrutura de dados: https://www.ime.usp.br/~pf/estruturas-de-dados/aulas/intro.html <p>
-* Caelum CS-14: Algoritmos e Estrutura de Dados <p>
+* Caelum CS-14 - Algoritmos e Estrutura de Dados: https://www.caelum.com.br/download/caelum-algoritmos-estruturas-dados-java-cs14.pdf <p>
