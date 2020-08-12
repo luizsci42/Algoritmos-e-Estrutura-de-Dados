@@ -4,7 +4,6 @@ package estruturas;
  * Árvore binária de busca
  */
 public class ArvoreBinariaBusca {
-    // TODO: Implementar deleção
     private NoDuplo raiz;
 
     public ArvoreBinariaBusca() {
@@ -13,7 +12,7 @@ public class ArvoreBinariaBusca {
 
     /**
      * Adiciona os elementos em ordem nível (acessa todos os
-     * nós em um nível da esquerda para a direita)
+     * nós em um nível da esquerda para a direita).
      *
      * @param valor Valor a ser adicionado na árvore.
      */
@@ -40,8 +39,68 @@ public class ArvoreBinariaBusca {
             novo = adicionarNo(raiz.getProximo(), valor);
             raiz.setProximo(novo);
         }
-
         return raiz;
+    }
+
+    /**
+     * Método para a remoção de nós da árvore
+     * @param valor O valor que se deseja remover
+     */
+    public void remover(int valor) {
+        if(this.raiz == null) {
+            System.out.println("A árvore está vazia. Não é possível remover");
+        }
+        else {
+            System.out.println("Remover: " + valor);
+            NoDuplo atual = this.raiz;
+            NoDuplo ascendente = atual;
+
+            // Primeiro percorremos a árvore até encontrar o valor,
+            // guardando o nó pai e o que queremos remover
+            while((int) atual.getValor() != valor) {
+                ascendente = atual;
+                if((int) atual.getValor() > valor) {
+                    atual = atual.getAnterior();
+                }
+                else {
+                    atual = atual.getProximo();
+                }
+            }
+            // Verificamos quantos filhos o nó contém e eecutamos as ações para cada caso
+            if(atual.getAnterior() == null && atual.getProximo() == null) {
+                System.out.println("Removendo folha");
+                // Caso em que o nó é uma folha, basta remover o nó da estrutura
+                if((int) ascendente.getValor() > valor) {
+                    ascendente.setAnterior(null);
+                }
+                else {
+                    ascendente.setProximo(null);
+                }
+            }
+            // Caso em que o nó possui apenas um descendente.
+            // Verificamos se o descendente possui valor menor ou maior que o
+            // ascendente do nó removido e o realocamos.
+            if(atual.getAnterior() == null && atual.getProximo() != null) {
+                System.out.println("Removendo nó com um descendente");
+                ascendente.setAnterior(atual.getProximo());
+                atual.setProximo(null);
+            }
+            else if(atual.getAnterior() != null && atual.getProximo() == null) {
+                System.out.println("Removendo nó com um descendente");
+                ascendente.setAnterior(atual.getAnterior());
+                atual.setAnterior(null);
+            }
+            // Caso em que o nó possui dois descendentes
+            if(atual.getAnterior() != null && atual.getProximo() != null) {
+                // TODO: Caso de remoção para nó com dois descendentes
+                System.out.println("Caso de remoção em desenvolvimento");
+                /* Neste caso, iremos substituir o valor do nó pelo seu sucessor in-order
+                 * (arvore esquerda, raiz, direita) e remover este predecessor da estrutura.
+                 *
+                 * O sucessor in-ordem é o menor valor da sub árvore direita do nó atual
+                 */
+            }
+        }
     }
 
     /**
@@ -51,6 +110,8 @@ public class ArvoreBinariaBusca {
      * @return Um NoDuplo, caso o valor exista e null caso contrário.
      */
     public NoDuplo buscar(int valor) {
+        // Implementamos um método auxiliar para abstrair a recursão.
+        // Assim, quando a busca é chamada, só é preciso passar o valor como argumento.
         return buscarAux(this.raiz, valor);
     }
 
@@ -77,7 +138,6 @@ public class ArvoreBinariaBusca {
             return buscarAux(raiz.getProximo(), valor);
         }
 
-        // Se não cair em nenhum desses casos, a árvore está vazia ou o elemento não foi encontrado
         return raiz;
     }
 
@@ -134,30 +194,42 @@ public class ArvoreBinariaBusca {
 
     public static void main(String[] args) {
         ArvoreBinariaBusca arvore = new ArvoreBinariaBusca();
-        arvore.adicionar(5);
-        arvore.adicionar(3);
-        arvore.adicionar(2);
-        arvore.adicionar(11);
-        arvore.adicionar(7);
-        arvore.adicionar(13);
+        arvore.adicionar(45);
+        arvore.adicionar(39);
+        arvore.adicionar(56);
+        arvore.adicionar(54);
+        arvore.adicionar(78);
+        arvore.adicionar(55);
+        arvore.adicionar(80);
 
-        NoDuplo quinzePresente = arvore.buscar(15);
-        NoDuplo onzePresente = arvore.buscar(11);
+        NoDuplo valor = arvore.buscar(55);
+        NoDuplo outroValor = arvore.buscar(11);
 
-        if(quinzePresente != null) {
-            System.out.println("O número 15 está na árvore");
+        if(valor != null) {
+            System.out.println("O número " + valor.getValor() + " está na árvore");
         }
         else {
-            System.out.println("Não encontrado o valor 15");
+            System.out.println("Valor não encontrado");
         }
 
-        if(onzePresente != null) {
-            System.out.println("O número " + onzePresente.getValor() + " está na árvore");
+        if(outroValor != null) {
+            System.out.println("O número " + outroValor.getValor() + " está na árvore");
         }
         else {
-            System.out.println("Não encontrado o valor 11");
+            System.out.println("Valor não encontrado");
         }
 
+        System.out.println("\nPré-ordem");
+        arvore.preOrdem();
+        System.out.println("\nIn-ordem");
+        arvore.inOrdem();
+        System.out.println("\nPós-ordem");
+        arvore.posOrdem();
+        System.out.print("\n");
+
+        arvore.remover(80);
+        arvore.remover(54);
+        arvore.remover(56);
         System.out.println("\nPré-ordem");
         arvore.preOrdem();
         System.out.println("\nIn-ordem");
