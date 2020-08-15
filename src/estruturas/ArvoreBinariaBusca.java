@@ -92,13 +92,25 @@ public class ArvoreBinariaBusca {
             }
             // Caso em que o nó possui dois descendentes
             if(atual.getAnterior() != null && atual.getProximo() != null) {
-                // TODO: Caso de remoção para nó com dois descendentes
-                System.out.println("Caso de remoção em desenvolvimento");
-                /* Neste caso, iremos substituir o valor do nó pelo seu sucessor in-order
-                 * (arvore esquerda, raiz, direita) e remover este predecessor da estrutura.
+                System.out.println("Removendo nó com dois descendentes");
+                /* Neste caso, iremos substituir o valor do nó pelo seu antecessr ou sucessor in-order
+                 * (arvore esquerda, raiz, direita) e remover este predecessor ou sucessor da estrutura.
                  *
-                 * O sucessor in-ordem é o menor valor da sub árvore direita do nó atual
+                 * O sucessor in-ordem é o menor valor da sub árvore direita do nó atual. Já o antecessor
+                 * é o maior alor da sub árvore esquerda.
                  */
+                NoDuplo sucessor = buscarMenor(atual.getProximo());
+
+                remover((int) sucessor.getValor());
+                sucessor.setAnterior(atual.getAnterior());
+                sucessor.setProximo(atual.getProximo());
+
+                if((int) ascendente.getValor() > (int) sucessor.getValor()) {
+                    ascendente.setAnterior(sucessor);
+                }
+                else {
+                    ascendente.setProximo(sucessor);
+                }
             }
         }
     }
@@ -139,6 +151,28 @@ public class ArvoreBinariaBusca {
         }
 
         return raiz;
+    }
+
+    public NoDuplo buscarMaior(NoDuplo raiz) {
+        NoDuplo maior = raiz;
+
+        while (raiz != null) {
+            maior = raiz;
+            raiz = raiz.getProximo();
+        }
+
+        return maior;
+    }
+
+    public NoDuplo buscarMenor(NoDuplo raiz) {
+        NoDuplo menor = raiz;
+
+        while(raiz != null) {
+            menor = raiz;
+            raiz = raiz.getAnterior();
+        }
+
+        return menor;
     }
 
     /**
@@ -185,7 +219,7 @@ public class ArvoreBinariaBusca {
     }
 
     private void posOrdemAux(NoDuplo raiz) {
-        if(raiz != null) {
+        if (raiz != null) {
             posOrdemAux(raiz.getAnterior());
             posOrdemAux(raiz.getProximo());
             System.out.print(raiz.getValor() + " ");
@@ -225,7 +259,7 @@ public class ArvoreBinariaBusca {
         arvore.inOrdem();
         System.out.println("\nPós-ordem");
         arvore.posOrdem();
-        System.out.print("\n");
+        System.out.print("\n\n");
 
         arvore.remover(80);
         arvore.remover(54);
