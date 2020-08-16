@@ -49,14 +49,24 @@ public class ListaEncandeadaCircular {
         numElementos += 1;
     }
 
+    public void remover(No no) {
+        No atual = this.inicial;
+        No ultimo = atual;
+        while(atual != no) {
+            ultimo = atual;
+            atual = atual.getProximo();
+        }
+        ultimo.setProximo(atual.getProximo());
+    }
+
     public void percorrer() {
         No atual = inicial.getProximo();
         System.out.println("Circulando...");
         System.out.print(inicial.getValor() + " -> ");
 
         while (atual != inicial) {
-            atual = atual.getProximo();
             System.out.print(atual.getValor().toString() + " -> ");
+            atual = atual.getProximo();
         }
 
         System.out.println("...");

@@ -153,6 +153,11 @@ public class ArvoreBinariaBusca {
         return raiz;
     }
 
+    /**
+     * Encontra o nó com maior elemento da árvore binária de busca
+     * @param raiz raiz da árvore
+     * @return O nó com maior valor da árvore
+     */
     public NoDuplo buscarMaior(NoDuplo raiz) {
         NoDuplo maior = raiz;
 
@@ -164,6 +169,11 @@ public class ArvoreBinariaBusca {
         return maior;
     }
 
+    /**
+     * Encontra o nó com menor elemento da árvore binária de busca
+     * @param raiz raiz da árvore
+     * @return o nó com menor valor da árvore
+     */
     public NoDuplo buscarMenor(NoDuplo raiz) {
         NoDuplo menor = raiz;
 
