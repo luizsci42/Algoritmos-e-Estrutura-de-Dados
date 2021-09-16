@@ -1,7 +1,7 @@
 package estruturas;
 
 /**
- * Árvore binária de busca
+ * Arvore binária de busca
  */
 public class ArvoreBinariaBusca {
     private NoDuplo raiz;
@@ -66,7 +66,7 @@ public class ArvoreBinariaBusca {
                     atual = atual.getProximo();
                 }
             }
-            // Verificamos quantos filhos o nó contém e eecutamos as ações para cada caso
+            // Verificamos quantos filhos o nó contém e executamos as ações para cada caso
             if(atual.getAnterior() == null && atual.getProximo() == null) {
                 System.out.println("Removendo folha");
                 // Caso em que o nó é uma folha, basta remover o nó da estrutura
